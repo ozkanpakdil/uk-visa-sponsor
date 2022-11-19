@@ -1,8 +1,14 @@
 name: Get newest csv
 
 on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches-ignore: 
+      - main
   schedule:
-    - cron: '5 * * * *'
+    - cron: '0 0 * * 1'
 
 jobs:
   build:

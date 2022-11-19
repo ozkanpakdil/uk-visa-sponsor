@@ -17,8 +17,10 @@ jobs:
     steps:
       - name: cURL request
         run: |
+          set -x
           CSV_URL=`curl -f -L https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers | grep -Eo "https?://(.*)\.csv"`
           curl -o sponsoring-firms.csv -z sponsoring-firms.csv $CSV_URL
+          git add sponsoring-firms.csv
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: csv adding back to repo [skip ci] another test

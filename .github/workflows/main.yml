@@ -25,6 +25,7 @@ jobs:
           sudo apt install python3-pip
           pip install --upgrade csvtotable
           export PATH=$PATH:~/.local/bin
+          rm index.html
           csvtotable sponsoring-firms.csv index.html
           HTML=`curl -f -L https://raw.githubusercontent.com/ozkanpakdil/ozkanpakdil.github.io/master/_includes/google_analytics.html`
           sed -i 's/<\/body>/$HTML<\/body>/g' index.html

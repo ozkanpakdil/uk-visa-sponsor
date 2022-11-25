@@ -26,6 +26,8 @@ jobs:
           pip install --upgrade csvtotable
           export PATH=$PATH:~/.local/bin
           csvtotable sponsoring-firms.csv index.html
+          HTML=`curl -f -L https://raw.githubusercontent.com/ozkanpakdil/ozkanpakdil.github.io/master/_includes/google_analytics.html`
+          sed -i 's/<\/body>/$HTML<\/body>/g' index.html
           git add index.html
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:

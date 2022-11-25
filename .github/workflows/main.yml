@@ -27,8 +27,8 @@ jobs:
           export PATH=$PATH:~/.local/bin
           rm index.html
           csvtotable sponsoring-firms.csv index.html
-          HTML=`curl -f -L https://raw.githubusercontent.com/ozkanpakdil/ozkanpakdil.github.io/master/_includes/google_analytics.html`
-          sed -i "<\/body>/$HTML<\/body>/g" index.html
+          HTML=`curl -f -L https://raw.githubusercontent.com/ozkanpakdil/ozkanpakdil.github.io/master/_includes/google_analytics.html|tr '\n' ' '`
+          sed -i "s~<\/body>~$HTML<\/body>~g" index.html
           git add index.html
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:

@@ -5,7 +5,7 @@ $(document).ready(function () {
     $('#table tbody').on( 'click', 'tr', function () {
         var data = table.row( this ).data();
         console.log(data);
-        window.open("https://www.google.com/search?q="+data[0]+"+gov+uk");
+        window.open("https://www.google.com/search?q="+data[0].replace(/-/g, ' ')+"+gov+uk");
     });
     $("#table tr").css('cursor', 'pointer');
 });

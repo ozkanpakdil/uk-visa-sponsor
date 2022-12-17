@@ -33,7 +33,7 @@ jobs:
           sed -i "s~<\/html>~ ~g" index.html
           DATE=`date`
           sed -i "s~<caption>Table</caption>~<caption>Sponsor Company list from $DATE</caption>~g" index.html
-          sed -i "s~<title>Table</title>~<caption>Sponsor Company list from $DATE</caption>~g" index.html
+          sed -i "s~<title>Table</title>~<title>Sponsor Company list from $DATE</title>~g" index.html
           cat link.html >> index.html
           
           git add index.html

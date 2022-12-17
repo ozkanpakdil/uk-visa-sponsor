@@ -19,6 +19,7 @@ jobs:
       - name: cURL request
         run: |
           set -x
+          ls -ltr
           CSV_URL=`curl -f -L https://www.gov.uk/government/publications/register-of-licensed-sponsors-workers | grep -Eo "https?://(.*)\.csv"`
           curl -o sponsoring-firms.csv -z sponsoring-firms.csv $CSV_URL
           git add sponsoring-firms.csv
@@ -30,6 +31,8 @@ jobs:
           HTML=`curl -f -L https://raw.githubusercontent.com/ozkanpakdil/ozkanpakdil.github.io/master/_includes/google_analytics.html|tr '\n' ' '`
           sed -i "s~<\/body>~$HTML<\/body>~g" index.html
           git add index.html
+          git status
+          ls -ltr
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: csv adding back to repo [skip ci] another test

@@ -29,10 +29,10 @@ jobs:
           rm index.html
           csvtotable sponsoring-firms.csv index.html
           HTML=`curl -f -L https://raw.githubusercontent.com/ozkanpakdil/ozkanpakdil.github.io/master/_includes/google_analytics.html|tr '\n' ' '`
-          LINK=`curl -f -L https://raw.githubusercontent.com/ozkanpakdil/uk-visa-sponsor/main/link.js`
-          sed -i "s~<\/body>~$HTML$LINK<\/body>~g" index.html
+          sed -i "s~<\/body>~$HTML<\/body>~g" index.html
           DATE=${date}
           sed -i "s~<caption>Table</caption>~<caption>Company list from $DATE</caption>~g" index.html
+          echo links.js >> index.html
           git add index.html
           git status
           ls -ltr

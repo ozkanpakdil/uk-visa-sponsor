@@ -32,7 +32,7 @@ jobs:
           sed -i "s~<\/body>~$HTML<\/body>~g" index.html
           DATE=`date`
           sed -i "s~<caption>Table</caption>~<caption>Company list from $DATE</caption>~g" index.html
-          echo links.js >> index.html
+          cat links.js >> index.html
           git add index.html
           git status
           ls -ltr

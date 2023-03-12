@@ -32,8 +32,20 @@ jobs:
           sed -i "s~<\/body>~</style>$HTML~g" index.html
           sed -i "s~<\/html>~ ~g" index.html
           DATE=`date`
+          HORZAD="<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7072273676024711"
+            crossorigin="anonymous"></script>
+            <!-- ukvisa -->
+            <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-7072273676024711"
+            data-ad-slot="6126939351"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>"
           sed -i "s~<caption>Table</caption>~<caption>Sponsor Company list from $DATE</caption>~g" index.html
-          sed -i "s~<title>Table</title>~<title>Sponsor Company list from $DATE</title>~g" index.html
+          sed -i "s~<title>Table</title>~<title>Sponsor Company list from $DATE</title>$HORZAD~g" index.html
           sed -i "s~</head>~<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7072273676024711" crossorigin="anonymous"></script></head>~g" index.html
           
           cat link.html >> index.html

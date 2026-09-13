@@ -72,22 +72,27 @@ table.dataTable > tbody > tr > td {
   cursor: pointer;
 }
 /* Narrower Town/City and County columns (2nd and 3rd columns).
-   Explicit widths keep the DataTables header and body tables aligned;
-   overflow-wrap:anywhere lets rare long unbroken tokens wrap instead of
-   stretching the column. Small screens keep the natural auto sizing. */
+   Explicit widths capped with ellipsis so they hold in DataTables'
+   virtual-scroll (nowrap) mode; rare long values truncate with an
+   ellipsis instead of stretching the column or wrapping rows.
+   Small screens keep the natural auto sizing. */
 table.dataTable > thead > tr > th:nth-child(2),
 table.dataTable > tbody > tr > td:nth-child(2),
 table.dataTable > tfoot > tr > th:nth-child(2) {
   width: 7.5rem;
-  overflow-wrap: break-word;
-  overflow-wrap: anywhere;
+  max-width: 7.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 table.dataTable > thead > tr > th:nth-child(3),
 table.dataTable > tbody > tr > td:nth-child(3),
 table.dataTable > tfoot > tr > th:nth-child(3) {
   width: 6.5rem;
-  overflow-wrap: break-word;
-  overflow-wrap: anywhere;
+  max-width: 6.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @media (max-width: 767px) {
   table.dataTable > thead > tr > th:nth-child(2),
@@ -97,6 +102,9 @@ table.dataTable > tfoot > tr > th:nth-child(3) {
   table.dataTable > tbody > tr > td:nth-child(3),
   table.dataTable > tfoot > tr > th:nth-child(3) {
     width: auto;
-    overflow-wrap: normal;
+    max-width: none;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
   }
 }

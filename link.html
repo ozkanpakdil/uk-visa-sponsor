@@ -7,92 +7,24 @@
 
   gtag('config', 'G-NSB9K61M5S');
 </script>
-<style>
-/*
-  Always-light colour fix for uk-visa-sponsor (appended to index.html by the
-  GitHub Action). Owner preference: the page always shows the classic light
-  look (white background, dark text). The csvtotable auto/dark palettes are
-  pinned to the light values below, so no saved theme, OS dark preference or
-  half-applied engine state can put light text on a white page again.
-*/
-:root,
-[data-theme] {
-  color-scheme: light;
-  --ct-paper: #fff;
-  --ct-ink: #15181d;
-  --ct-muted: #61666e;
-  --ct-rule: #e6e8eb;
-  --ct-rule-strong: #cbd0d6;
-  --ct-accent: #004da8;
-  --ct-wash: #eaf1fc;
-  --ct-hover: #f4f6f8;
-}
-@media (prefers-color-scheme: dark) {
-  :root,
-  :root:not([data-theme]),
-  :root[data-theme] {
-    color-scheme: light;
-    --ct-paper: #fff;
-    --ct-ink: #15181d;
-    --ct-muted: #61666e;
-    --ct-rule: #e6e8eb;
-    --ct-rule-strong: #cbd0d6;
-    --ct-accent: #004da8;
-    --ct-wash: #eaf1fc;
-    --ct-hover: #f4f6f8;
-  }
-}
-html {
-  background: #fff;
-}
-body {
-  background: #fff;
-  color: #15181d;
-}
-table.dataTable > tbody > tr > td {
-  color: #15181d;
-}
-/* The built-in theme dropdown is now inert (everything renders light);
-   hide it so it does not look broken. */
-#csvtotable-theme {
-  display: none !important;
-}
-/* Top title bar */
-#csvtotable-topbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: .3rem .9rem;
-  margin-bottom: .8rem;
-}
-.csvtotable-topbar-title {
-  font-weight: 600;
-  font-size: var(--ct-text-base);
-  color: var(--ct-ink);
-}
-.csvtotable-topbar-date {
-  font-weight: 400;
-  color: var(--ct-muted);
-  font-size: var(--ct-text-xs);
-  margin-left: .45rem;
-}
-#csvtotable-table tbody tr {
-  cursor: pointer;
-}
-</style>
+<link rel="stylesheet" href="fix.css">
 <script>
 (function () {
   "use strict";
 
-  /* Top bar showing the page title and the list date. */
+  /* Top bar showing the page title as a real <h1> (good for SEO). */
+  if (document.title.trim().toLowerCase() === "table") {
+    document.title = "UK Visa Sponsor Companies — Full List, Updated Weekly";
+  }
   var main = document.querySelector("main.csvtotable");
   if (main) {
     var bar = document.createElement("nav");
     bar.id = "csvtotable-topbar";
     bar.setAttribute("aria-label", "Page title");
-    var title = document.createElement("span");
+    var title = document.createElement("h1");
     title.className = "csvtotable-topbar-title";
-    var raw = document.title || "UK Visa Sponsor Company list";
+    var raw = document.title || "";
+    if (!raw || raw.trim().toLowerCase() === "table") raw = "UK Visa Sponsor Company list";
     var cut = raw.indexOf(" from ");
     title.textContent = cut > 0 ? raw.slice(0, cut) : raw;
     if (cut > 0) {
@@ -208,6 +140,6 @@ table.dataTable > tbody > tr > td {
   }
 })();
 </script>
-
+<a href="https://clustrmaps.com/site/1bl00" title="Visit tracker"><img width="30" src="//www.clustrmaps.com/map_v2.png?d=yihjkvzkrnkhR7PmJGyXjZDpurEc8CbVHvBnCLFhxsE&amp;cl=ffffff"></a>
 </body>
 </html>

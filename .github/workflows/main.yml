@@ -28,6 +28,18 @@ jobs:
           export PATH=$PATH:~/.local/bin
           rm index.html
           csvtotable sponsoring-firms.csv index.html
+          python3 <<'PYEOF'
+          import re
+          html = open("index.html").read()
+          m = re.search(r"<style>.*?</style>", html, re.S)
+          if m and html.count("<style>") == 1:
+              open("csvtotable.css", "w").write(m.group(0)[len("<style>"):-len("</style>")])
+              html = html[:m.start()] + '<link rel="stylesheet" href="csvtotable.css">' + html[m.end():]
+              open("index.html", "w").write(html)
+          else:
+              print("style extraction skipped, <style> blocks: %d" % html.count("<style>"))
+          PYEOF
+          sed -i "s~<title>Table</title>~<title>UK Visa Sponsor Companies — Full List, Updated Weekly</title><meta name=\"description\" content=\"Full list of UK companies licensed to sponsor work visas, from the official GOV.UK register of licensed sponsors. Updated weekly.\">~g" index.html
           HTML=`curl -f -L https://raw.githubusercontent.com/ozkanpakdil/ozkanpakdil.github.io/master/_includes/google_analytics.html|tr '\n' ' '`
           sed -i "s~<\/body>~</style>$HTML~g" index.html
           sed -i "s~<\/html>~ ~g" index.html
@@ -35,7 +47,7 @@ jobs:
           
           cat link.html >> index.html
           
-          git add index.html
+          git add index.html csvtotable.css fix.css
           git status
           ls -ltr
       - uses: stefanzweifel/git-auto-commit-action@v4
